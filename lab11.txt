@@ -1,0 +1,22 @@
+Reorder Buffer = RB
+ 
+fpr = registrii flotanti
+gpr = registrii generali
+ 
+-memorie alocata dinamic care retine index-ul si instructiunea dupa decodificarea lor
+-el determina cand instructiunile pot fi executate
+(sursa: csg.csail.mit.edu/pubs/bluespec/DesignReorderBuffer.pdf)
+-practic,RB retine index-ul instructiunilor care sunt in curs de executie dupa ce se trece de faza de decodificare,
+	dar inainte sa fie scrise in setul de registrii generali
+ 
+-poate fi gestionat ca si fifo
+-odata ce instructiunea e decodificata este alocata in coada
+ 
+-cand instrucitunea e in prima pozitie,se va efectua o cautare asociativa in registrii flotanti si generali.
+	=> daca este hit se va inscrie starea instructiunii in registrii generali
+	=> daca este miss se va da flush(se va goli_ buffer-ul de reordonare si cel de redenumire
+ 
+-in caz ca instructiunea nu e inca gata,buffer-ul rb intra intr-un stadiu de delay pana se termina executia instructiunii
+ 
+-se va da commit la instructiuni si se scriu rezultatele in gpr
+-La exceptie,se da flush la buffer-ul de reordonare(RB)
