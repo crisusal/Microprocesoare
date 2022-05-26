@@ -38,6 +38,7 @@ afisare_finala:
 	
 	
 	done
+	
 			
 	
 	
