@@ -1,0 +1,44 @@
+Exercitiul 1
+
+Comparatie intre DLX si MIPS
+	Asemanari: -ambele au 32 registrii
+	Diferente: -- la MIPS comentariile se scriu cu # , pe cand la DLX se scriu cu ;
+	
+IMPLEMENTAREA PIPELINE LA DLX
+
+Valorile transmise dintr-o etapa în alta sa fie stocate în registrii pipeline.
+Cei 5 ciclii sunt:
+	1.IF (Instruction Fetch)
+		Obtine PC-ul si aduce instructiunea curenta din memorie în registrul IR;
+		apoi se face NextPC<-PC+4 (adresa urmatoarei instructiuni)
+		
+	2.ID (Instruction Decode)
+		Decodifica instructiunea si acceseaza setul de registri pentru a citi continutul acestora.
+		Decodificarea se face în paralel cu citirea registrilor. ( tehnica numita fixed-field decoding)
+	
+	3. EX (Execution)
+			Se face in functie de tipul instructiunilor. Avem urmatoarele situatii:
+				3.1 Referinta la memorie
+					Se efectueaza adunarea în ALU si se obtine adresa efectiva de memorie care se plaseaza în ALUOutput
+				3.2 Instructiune ALU de tip Registru-Registru-Registru
+					Se efectueaza operatia respectiva ( specificata in opcode) intre valorile celor 2 registrii, rezultatul fiind depus in ALUOutput
+				3.3 Instructiune ALU de tip Registru-Imediat
+					Se efectueaza operatia respectiva intre registru si operandul imediat, rezultatul se pune in ALUOutput
+				3.4 Branch
+					Se calculeaza adresa de salt ( NPC+valoare imediata), apoi se verifica daca saltul a fost facut sau nu.
+	4. MEM (Memory access)
+			Exista 3 tipuri de instructiuni :
+				4.1 Referinta la memorie	
+						-instructiuni de tip LOAD si STORE
+				4.2 Branch
+						Daca saltul se face PC-ul este înlocuit cu adresa de salt aflata în registrul ALUOutput iar daca saltul nu se face el este înlocuit cu PC-ul
+incrementat aflat în registrul NPC.
+
+	5.WB (Write Back)
+			Scrie rezultatul în setul de registri fie ca acesta provine din memorie sau din iesirile ALU.
+
+						
+	
+					
+					
+						
